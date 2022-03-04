@@ -1,0 +1,26 @@
+{
+  "name": "Chat-TTS-Backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlvaroSReis/Chat-TTS-Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlvaroSReis/Chat-TTS-Backend/issues"
+  },
+  "homepage": "https://github.com/AlvaroSReis/Chat-TTS-Backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "pg": "^8.7.1",
+    "proxy-addr": "^2.0.7"
+  }
+}
