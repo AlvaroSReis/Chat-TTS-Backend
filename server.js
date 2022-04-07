@@ -5,13 +5,18 @@ const io = require("socket.io")(server);
 const port = 3000;
 
 
-//app.use(cors());
+app.get('/', (req, res) => {
+    res.send({ response: 'Conectado com sucesso!' });
+});
 
-io.on("connection", socket => {
+app.set("ipaddr", "10.0.0.1");
+
+io.on("connection", (socket) => {
+    console.log("user connected")
     console.log(socket.id);
-    socket.on("chat message", msg => {
+    socket.on("message", msg => {
         console.log(msg);
-        io.emit("chat message", msg);
+        io.emit("message", msg);
     });
 });
 
