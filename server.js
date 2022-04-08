@@ -4,7 +4,6 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const port = 3000;
 
-});
 //app.set("ipaddr", "10.0.0.1");
 
 io.on("connection", (socket) => {
@@ -21,6 +20,6 @@ io.on("connection", (socket) => {
 });
 
 
-server.listen(process.env.port || port, () => console.log("Server running on port: " + port));
+server.listen((process.env.port || port), () => console.log("Server running on port: " + port));
 
 
