@@ -13,7 +13,11 @@ app.set("ipaddr", "10.0.0.1");
 
 io.on("connection", (socket) => {
     console.log("user connected")
-    console.log(socket.id);
+
+    socket.on('disconnect', (reason) => {
+        io.emit('disconnect', socket.client.conn.server.clientsCount)
+      });
+
     socket.on("message", msg => {
         console.log(msg);
         io.emit("message", msg);
@@ -21,6 +25,6 @@ io.on("connection", (socket) => {
 });
 
 
-server.listen(port, () => console.log("Server running on port: " + port));
+server.listen(process.env.port || port, () => console.log("Server running on port: " + port));
 
 
