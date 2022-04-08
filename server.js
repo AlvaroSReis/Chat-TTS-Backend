@@ -8,6 +8,8 @@ const res = require("express/lib/response");
 
 app.use(cors());
 
+app.set("ipaddr", "0.0.0.0");
+
 app.get('/', (req, res) => {
     res.send('running')
 });
