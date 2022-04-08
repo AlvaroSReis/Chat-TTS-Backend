@@ -4,11 +4,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const port = 3000;
 
-
-app.get('/', (req, res) => {
-    res.send({ response: 'Conectado com sucesso!' });
 });
-
 //app.set("ipaddr", "10.0.0.1");
 
 io.on("connection", (socket) => {
