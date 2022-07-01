@@ -110,7 +110,7 @@ io.on('connection', (socket) => {
       io.emit('disconnect')
     });
   
-    socket.on('message', ({data, name}) => {
+    socket.on('message', (data, name) => {
       io.emit('message', data, name)
     })
   
