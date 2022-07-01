@@ -104,13 +104,13 @@ Io for chat
 
 
 io.on('connection', (socket) => {
-    //io.emit('connected', socket.client.conn.server.clientsCount)
+    io.emit('connected')
   
     socket.on('disconnect', (reason) => {
-      //io.emit('disconnect', socket.client.conn.server.clientsCount)
+      io.emit('disconnect')
     });
   
-    socket.on('message', (data, name) => {
+    socket.on('message', ({data, name}) => {
       io.emit('message', data, name)
     })
   
