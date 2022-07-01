@@ -101,28 +101,7 @@ app.post('/novoUsuario', (req, res)=> {
 /*=======================================
 Io for chat
 =========================================*/
-io.on("connection", (socket) => {
-    console.log("user connected")
 
-    socket.on('disconnect', (reason) => {
-        io.emit('disconnect', socket.client.conn.server.clientsCount)
-      });
-
-    socket.on("message", (data, name) => {
-        //console.log(msg);
-        io.emit("message", (data, name));
-    });
-    socket.on('types', () => {
-        socket.broadcast.emit('types')
-      })
-    
-      socket.on('blur', () => {
-        socket.broadcast.emit('blur')
-    });
-});
-
-
-/*
 io.on("connection", (socket) => {
     console.log("user connected")
 
@@ -135,7 +114,7 @@ io.on("connection", (socket) => {
         io.emit("message", msg);
     });
 });
-*/
+
 client.connect();
 
 server.listen(port, () => console.log("Server running on port: " + port));
