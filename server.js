@@ -109,7 +109,7 @@ io.on("connection", (socket) => {
       });
 
     socket.on("message", (data, name) => {
-        console.log(msg);
+        //console.log(msg);
         io.emit("message", (data, name));
     });
 });
