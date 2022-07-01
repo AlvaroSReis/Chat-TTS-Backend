@@ -112,6 +112,13 @@ io.on("connection", (socket) => {
         //console.log(msg);
         io.emit("message", (data, name));
     });
+    socket.on('types', () => {
+        socket.broadcast.emit('types')
+      })
+    
+      socket.on('blur', () => {
+        socket.broadcast.emit('blur')
+    });
 });
 
 
