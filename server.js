@@ -99,12 +99,28 @@ app.get('/users', (req, res)=>{
 /*=======================================
 Posts
 =========================================*/
-
+/*
 // Create new user
 app.post('/novoUsuario', (req, res)=> {
     const user = req.body;
     let insertQuery = `INSERT INTO usuario(nome, username, email, senha) 
                        VALUES('${user.nome}', '${user.username}', '${user.email}', '${user.senha}')`
+
+                       client.query(insertQuery, (err, result)=>{
+        if(!err){
+            res.send('Sucess')
+        }
+        else{ console.log(err.message) }
+    })
+    client.end;
+})
+*/
+
+// Create new user
+app.post('/novoUsuario', (req, res)=> {
+    const user = req.body;
+    let insertQuery = `INSERT INTO usuario(username, email) 
+                       VALUES('${user.username}', '${user.email}')`
 
                        client.query(insertQuery, (err, result)=>{
         if(!err){
