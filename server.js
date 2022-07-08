@@ -60,6 +60,24 @@ app.get('/userinfo/:username', (req, res)=>{
     client.end;
 })
 
+app.get('/username/:email', (req, res)=>{
+
+    const email = String(req.params.email)
+    client.query(`SELECT username FROM usuario WHERE email = '${email}';`, (err, result)=>{
+        console.log(result)
+        if(!err){
+
+            res.send(result.rows);
+        }else{
+            res.send('')
+        }
+        
+    });
+    client.end;
+})
+
+
+
 //test
 app.get('/users', (req, res)=>{
 
@@ -112,14 +130,6 @@ io.on('connection', (socket) => {
   
     socket.on('message', (data, name) => {
       io.emit('message', data, name)
-    })
-  
-    socket.on('types', () => {
-      socket.broadcast.emit('types')
-    })
-  
-    socket.on('blur', () => {
-      socket.broadcast.emit('blur')
     })
   });
 
