@@ -51,7 +51,7 @@ app.get('/userinfo/:username', (req, res)=>{
         console.log(result)
         if(!err){
 
-            res.send(result.rows.username);
+            res.send(JSON.stringify(result.rows.username));
         }else{
             res.send(err)
         }
