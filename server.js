@@ -64,7 +64,7 @@ app.get('/username/:email', (req, res)=>{
 
     const email = String(req.params.email)
     client.query(`SELECT username FROM usuario WHERE email = '${email}';`, (err, result)=>{
-        console.log(result)
+        console.log(result.rows)
         if(!err){
 
             res.send(result.rows);
