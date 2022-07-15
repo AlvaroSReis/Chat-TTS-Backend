@@ -153,7 +153,7 @@ io.on('connection', (socket) => {
     io.emit('connected')
   
     socket.on('disconnect', (reason) => {
-      io.disconnect();
+      io.emit('disconnect')
     });
   
     socket.on('message', (data, name) => {
