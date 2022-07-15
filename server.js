@@ -98,10 +98,10 @@ app.get('/users', (req, res)=>{
 app.get('/friends/:user', (req, res) => {
     const user = String(req.params.user)
     client.query(`SELECT id FROM usuario WHERE username = '${user}';`, (err, result)=> {
-      console.log(result.rows[0].id) 
+      console.log(result.rows.data[0].id) 
       if(!err){
 
-            res.send(result.rows[0].id);
+            res.send(result.rows.data[0].id);
         }else{
             res.send(err)
         }
