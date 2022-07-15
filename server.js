@@ -99,7 +99,7 @@ app.get('/friends/:user', (req, res) => {
     const user = String(req.params.user)
     client.query(`SELECT username FROM friendship INNER JOIN usuario ON usuario1 = id OR usuario2 = id WHERE 
     (usuario1 = (SELECT id FROM usuario WHERE username = '${user}') OR usuario2 = (SELECT id FROM usuario WHERE 
-    username =$'{user}')) AND username != ${user};`, (err, result)=> {
+    username ='${user}')) AND username != ${user};`, (err, result)=> {
       console.log(result.rows) 
       if(!err){
             res.send(result.rows);
