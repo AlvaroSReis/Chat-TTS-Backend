@@ -95,6 +95,15 @@ app.get('/users', (req, res)=>{
     client.end;
 })
 
+app.get('/friends/:user', (req, res) => {
+    const user = String(req.params.email)
+    client.query(`SELECT id FROM usuario WHERE username = '${user}';`, (err, result)=> {
+      console.log(result.rows)  
+    })
+    //client.query(`SELECT username FROM friendship INNER JOIN usuario ON usuario1 = id OR usuario2 = id WHERE 
+    //(usuario1 = ${userid} OR usuario2 = ${userid}) AND username != ${user};`)
+})
+
 
 /*=======================================
 Posts
