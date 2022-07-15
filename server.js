@@ -65,12 +65,21 @@ app.get('/username/:email', (req, res)=>{
     const email = String(req.params.email)
     client.query(`SELECT username FROM usuario WHERE email = '${email}';`, (err, result)=>{
         console.log(result.rows)
+        /*
         try{
             console.log(result.rows[0].username)
         }catch{
+            
             //err
         }
+        */
         if(!err){
+            //try {
+            //    console.log(result.rows[0].username)
+            //    res.send(result.rows)
+            //}catch{
+                
+            //}
             res.send(result.rows);
         }else{
             res.send('')
@@ -141,11 +150,11 @@ Io for chat
 
 
 io.on('connection', (socket) => {
-    io.emit('connected')
+    //io.emit('connected')
   
-    socket.on('disconnect', (reason) => {
-      io.emit('disconnect')
-    });
+    //socket.on('disconnect', (reason) => {
+    //  io.emit('disconnect')
+    //});
   
     socket.on('message', (data, name) => {
       io.emit('message', data, name)
