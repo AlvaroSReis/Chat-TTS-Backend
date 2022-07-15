@@ -150,10 +150,10 @@ Io for chat
 
 
 io.on('connection', (socket) => {
-    //io.emit('connected')
+    io.emit('connected')
   
     //socket.on('disconnect', (reason) => {
-    //  io.emit('disconnect')
+      //io.emit('disconnect')
     //});
   
     socket.on('message', (data, name) => {
