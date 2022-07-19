@@ -162,7 +162,7 @@ app.post('/novoUsuario', (req, res) => {
 
 //UserLogin
 
-app.post('/novoUsuario', (req, res) => {
+app.post('/tokenLogin', (req, res) => {
     const token = req.body;
     let tokenData = token.acessToken
 
