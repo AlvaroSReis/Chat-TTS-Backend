@@ -167,13 +167,17 @@ app.post('/tokenLogin', (req, res) => {
     let tokenData = token.acessToken
 
     console.log(tokenData)
+    if (!err) {
+        res.send('TokenReceived')
+    }else {
+        console.log(err.message)
+    }
     //client.query(insertQuery, (err, result) => {
     //    if (!err) {
     //        res.send('Sucess')
     //    }
     //    else { console.log(err.message) }
     //})
-    res.send('TokenReceived')
     client.end;
 })
 
