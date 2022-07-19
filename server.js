@@ -164,13 +164,18 @@ app.post('/novoUsuario', (req, res) => {
 
 app.post('/tokenLogin', (req, res) => {
     const token = req.body;
-    let tokenData = token
-
     //console.log(tokenData)
     if (token?.type === "success") {
         //getUserData(token)
+        let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        userInfoResponse.json().then(data => {
+            console.log(data)
+
+        });
         res.send('TokenReceived')
-    }else {
+    } else {
         console.log(err.message)
     }
     //client.query(insertQuery, (err, result) => {
