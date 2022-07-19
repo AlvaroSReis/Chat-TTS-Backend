@@ -14,7 +14,24 @@ const client = require('./connection.js')
 const io = require("socket.io")(server);
 const port = process.env.PORT || 3000;
 
+//===============================================
+// Functions
+//===============================================
 
+async function getUserData(acessToken) {
+    let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+        headers: { Authorization: `Bearer ${accessToken}` }
+    })
+    userInfoResponse.json().then(data => {
+        setUserInfo(data)
+
+    });
+}
+
+
+//===============================================
+// REST
+//===============================================
 
 //Default response for check if is up
 app.get('/', (req, res) => {
@@ -45,25 +62,25 @@ app.get('/login/:username&:password', (req, res)=>{
 */
 //Usuario
 
-app.get('/userinfo/:username', (req, res)=>{
+app.get('/userinfo/:username', (req, res) => {
 
     const user = String(req.params.username)
-    client.query(`SELECT * FROM usuario WHERE username = '${user}';`, (err, result)=>{
+    client.query(`SELECT * FROM usuario WHERE username = '${user}';`, (err, result) => {
         console.log(result)
-        if(!err){
+        if (!err) {
 
             res.send(JSON.stringify(result.rows.username));
-        }else{
+        } else {
             res.send(err)
         }
-        
+
     });
     client.end;
 })
 
-app.get('/username/:email', (req, res)=>{
+app.get('/username/:email', (req, res) => {
     const email = String(req.params.email)
-    client.query(`SELECT username FROM usuario WHERE email = '${email}';`, (err, result)=>{
+    client.query(`SELECT username FROM usuario WHERE email = '${email}';`, (err, result) => {
         console.log(result.rows)
         /*
         try{
@@ -73,18 +90,18 @@ app.get('/username/:email', (req, res)=>{
             //err
         }
         */
-        if(!err){
+        if (!err) {
             //try {
             //    console.log(result.rows[0].username)
             //    res.send(result.rows)
             //}catch{
-                
+
             //}
             res.send(result.rows);
-        }else{
+        } else {
             res.send('')
         }
-        
+
     });
     client.end;
 })
@@ -92,17 +109,17 @@ app.get('/username/:email', (req, res)=>{
 
 
 //test
-app.get('/users', (req, res)=>{
+app.get('/users', (req, res) => {
 
     const user = String(req.params.username)
-    client.query(`SELECT * FROM usuario`, (err, result)=>{
+    client.query(`SELECT * FROM usuario`, (err, result) => {
         console.log(result.rows)
-        if(!err){
+        if (!err) {
             res.send(result.rows);
-        }else{
+        } else {
             res.send(err)
         }
-        
+
     });
     client.end;
 })
@@ -110,11 +127,11 @@ app.get('/users', (req, res)=>{
 //get friends
 app.get('/friends/:user', (req, res) => {
     const user = String(req.params.user)
-    client.query(`SELECT username FROM friendship INNER JOIN usuario ON usuario1 = id OR usuario2 = id WHERE (usuario1 = (SELECT id FROM usuario WHERE username = '${user}') OR usuario2 = (SELECT id FROM usuario WHERE username ='${user}')) AND username != '${user}';`, (err, result)=> {
-      //console.log(result.rows) 
-      if(!err){
+    client.query(`SELECT username FROM friendship INNER JOIN usuario ON usuario1 = id OR usuario2 = id WHERE (usuario1 = (SELECT id FROM usuario WHERE username = '${user}') OR usuario2 = (SELECT id FROM usuario WHERE username ='${user}')) AND username != '${user}';`, (err, result) => {
+        //console.log(result.rows) 
+        if (!err) {
             res.send(result.rows);
-        }else{
+        } else {
             res.send(err)
         }
     })
@@ -129,20 +146,36 @@ Posts
 
 
 // Create new user
-app.post('/novoUsuario', (req, res)=> {
+app.post('/novoUsuario', (req, res) => {
     const user = req.body;
     let insertQuery = `INSERT INTO usuario(username, email) 
                        VALUES('${user.username}', '${user.email}')`
 
-                       client.query(insertQuery, (err, result)=>{
-        if(!err){
+    client.query(insertQuery, (err, result) => {
+        if (!err) {
             res.send('Sucess')
         }
-        else{ console.log(err.message) }
+        else { console.log(err.message) }
     })
     client.end;
 })
 
+//UserLogin
+
+app.post('/novoUsuario', (req, res) => {
+    const token = req.body;
+    let tokenData = token.acessToken
+
+    console.log(tokenData)
+    //client.query(insertQuery, (err, result) => {
+    //    if (!err) {
+    //        res.send('Sucess')
+    //    }
+    //    else { console.log(err.message) }
+    //})
+    res.send('TokenReceived')
+    client.end;
+})
 
 /*=======================================
 Io for chat
@@ -151,15 +184,15 @@ Io for chat
 
 io.on('connection', (socket) => {
     io.emit('connected')
-  
+
     //socket.on('disconnect', (reason) => {
-      //io.emit('disconnect')
+    //io.emit('disconnect')
     //});
-  
+
     socket.on('message', (data, name) => {
-      io.emit('message', data, name)
+        io.emit('message', data, name)
     })
-  });
+});
 
 /*
 io.on("connection", (socket) => {
