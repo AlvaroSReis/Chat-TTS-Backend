@@ -168,7 +168,7 @@ app.post('/tokenLogin', (req, res) => {
     const token = req.body;
     //console.log(tokenData)
     if (token?.type === "success") {
-        getUserData(token)
+        //getUserData(token)
         res.send('TokenReceived')
     } else {
         console.log(err.message)
