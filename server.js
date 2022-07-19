@@ -23,7 +23,7 @@ async function getUserData(acessToken) {
         headers: { Authorization: `Bearer ${accessToken}` }
     })
     userInfoResponse.json().then(data => {
-        setUserInfo(data)
+        console.log(data)
 
     });
 }
@@ -166,8 +166,9 @@ app.post('/tokenLogin', (req, res) => {
     const token = req.body;
     let tokenData = token
 
-    console.log(tokenData)
+    //console.log(tokenData)
     if (token) {
+        getUserData(token)
         res.send('TokenReceived')
     }else {
         console.log(err.message)
