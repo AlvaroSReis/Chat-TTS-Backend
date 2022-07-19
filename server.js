@@ -164,7 +164,7 @@ app.post('/novoUsuario', (req, res) => {
 
 app.post('/tokenLogin', (req, res) => {
     const token = req.body;
-    let tokenData = token.acessToken
+    let tokenData = token
 
     console.log(tokenData)
     if (token) {
