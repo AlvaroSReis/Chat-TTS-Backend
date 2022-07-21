@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/AlvaroSReis/Chat-TTS-Backend#readme",
   "dependencies": {
-    "axios": "^0.27.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "pg": "^8.7.1",
